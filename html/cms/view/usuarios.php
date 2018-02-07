@@ -17,7 +17,11 @@
                 </li>
                 <li class="col-3 derecha">
                     <a href="">editar</a>
-                    <a href="">activar</a>
+                    <?php $color = ($dato->activo==1) ? 'activo' : 'inactivo';?>
+                    <?php $texto = ($dato->activo==1) ? 'desactivar' : 'activar';?>
+                    <?php $ruta = $_SESSION['home']."panel/usuarios/".$texto."/".$dato->id ?>
+                    <a href="<?php echo $ruta ?>" class="<?php echo $color ?>"title="<?php echo $texto?>">
+                        <span class="far fa-check-square"></span></a>
                     <a href="">borrar</a>
                 </li>
             </ul>    

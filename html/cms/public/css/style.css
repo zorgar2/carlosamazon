@@ -114,3 +114,16 @@ a:hover{
 .derecha{
     text-align: right;
 }
+
+.alert{
+    position:absolute;
+    width: 80%;
+}
+
+.activo:hover{
+    color:crimson;
+}
+
+.inactivo:hover{
+    color:darckgreen;
+}
