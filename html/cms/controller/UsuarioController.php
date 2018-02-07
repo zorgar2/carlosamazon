@@ -12,9 +12,11 @@ class UsuarioController {
     var $datos;
     
     function __construct(){
+        
         //Inicializo la conexión
         $dbHelper = new DbHelper();
         $this->db = $dbHelper->db;
+        
         //Instancio el ViewHelper
         $viewHelper = new ViewHelper();
         $this->view = $viewHelper;
@@ -95,6 +97,26 @@ class UsuarioController {
         
         //Le redirijo al panel
         header("Location: ".$_SESSION['home']."panel");
+        
+    }
+    public function crear(){
+        
+        
+
+        //Create
+        //Insert
+        $nombre = "usuario".rand(1000, 9999);
+        $registros = $this->db->exec('INSERT INTO usuarios (usuario) VALUES ("'.$nombre.'")');
+        if ($registros){
+            $mensaje[] = ['tipo' => 'succes',
+                        'texto' => "El usuario <strong>$nombre>/strong> se ha creado correctamente"];
+        }else{
+            $mensaje[] = ['tipo' => 'danger',
+                        'texto' => "Ha ocurrido un error al añadir el usuario"];
+            
+        }
+        $_SESSION['mensaje'] = $mensaje;
+        header("Location: ".$_SESSION['home']."panel/usuarios");
         
     }
 }

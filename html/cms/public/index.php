@@ -50,6 +50,7 @@ switch ($ruta){
     case 'panel': 
         //Instancio el controlador
         $controller = new UsuarioController;
+        
         //Le mando al panel de acceso
         $controller->acceso();
         break;
@@ -64,6 +65,12 @@ switch ($ruta){
         $controller = new UsuarioController;
         //Le mando al método salir
         $controller->index();
+        break;
+    case 'panel/usuarios/crear':
+        //Instancio el controlador
+        $controller = new UsuarioController;
+        //Le mando al método salir
+        $controller->crear();
         break;
 }
 
