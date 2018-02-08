@@ -20,6 +20,7 @@ class UsuarioController {
         //Instancio el ViewHelper
         $viewHelper = new ViewHelper();
         $this->view = $viewHelper;
+        
     }
     
     public function acceso(){
@@ -40,11 +41,13 @@ class UsuarioController {
         $datos->mensaje = "Por favor, introduce usuario y clave";
         //Compruebo si ha rellenado el formulario
         if (isset($_POST['acceder'])){
+            
             $usuario = filter_input(INPUT_POST, 'usuario', FILTER_SANITIZE_STRING);
             $clave = filter_input(INPUT_POST, 'clave', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             if ($usuario AND $clave){
                 //Compruebo que existe el usuario
                 if ($this->comprueba_usuario($usuario,$clave)){
+                   
                     //Entro al panel
                     $datos->usuario = $_SESSION['usuario'];
                     $vista = "panel";
@@ -62,7 +65,8 @@ class UsuarioController {
     function comprueba_usuario($usuario,$clave){
         
         //Select con OBJ
-        $resultado = $this->db->query("SELECT * FROM usuarios WHERE usuario='".$usuario."'");
+        
+        $resultado = $this->db->query("SELECT * FROM usuario WHERE usuario='".$usuario."'");
         //Asigno la consulta a una variable
         $data = $resultado->fetch(\PDO::FETCH_OBJ);
         //Compruebo la contraseña
@@ -79,7 +83,7 @@ class UsuarioController {
     public function index(){
 
         //Select con OBJ
-        $resultado = $this->db->query("SELECT * FROM usuarios");
+        $resultado = $this->db->query("SELECT * FROM usuario");
         //Asigno la consulta a una variable
         while ($data = $resultado->fetch(\PDO::FETCH_OBJ)){ //Recorro el resultado
             $usuarios[] = new Usuario($data);
@@ -106,7 +110,7 @@ class UsuarioController {
         //Create
         //Insert
         $nombre = "usuario".rand(1000, 9999);
-        $registros = $this->db->exec('INSERT INTO usuarios (usuario) VALUES ("'.$nombre.'")');
+        $registros = $this->db->exec('INSERT INTO usuario (usuario) VALUES ("'.$nombre.'")');
         if ($registros){
             $mensaje[] = ['tipo' => 'succes',
                         'texto' => "El usuario <strong>$nombre>/strong> se ha creado correctamente"];
