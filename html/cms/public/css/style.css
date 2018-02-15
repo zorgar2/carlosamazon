@@ -121,9 +121,9 @@ a:hover{
 }
 
 .activo:hover{
-    color:crimson;
+    color:green;
 }
 
 .inactivo:hover{
-    color:green;
+    color:crimson;
 }

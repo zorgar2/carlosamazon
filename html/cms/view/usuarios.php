@@ -16,13 +16,15 @@
                     </a>    
                 </li>
                 <li class="col-3 derecha">
-                    <a href="">editar</a>
+                    <?php $ruta = $_SESSION['home']."panel/usuarios/editar/".$dato->id ?>
+                    <a href="<?php echo $ruta ?>">editar</a>
                     <?php $color = ($dato->activo==1) ? 'activo' : 'inactivo';?>
                     <?php $texto = ($dato->activo==1) ? 'desactivar' : 'activar';?>
                     <?php $ruta = $_SESSION['home']."panel/usuarios/".$texto."/".$dato->id ?>
                     <a href="<?php echo $ruta ?>" class="<?php echo $color ?>"title="<?php echo $texto?>">
                         <span class="far fa-check-square"></span></a>
-                    <a href="">borrar</a>
+                    <?php $ruta = $_SESSION['home']."panel/usuarios/borrar/".$dato->id ?>    
+                    <a href="<?php echo $ruta ?>">borrar</a>
                 </li>
             </ul>    
         <?php } ?>

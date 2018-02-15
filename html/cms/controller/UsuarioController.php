@@ -12,15 +12,12 @@ class UsuarioController {
     var $datos;
     
     function __construct(){
-        
         //Inicializo la conexión
         $dbHelper = new DbHelper();
         $this->db = $dbHelper->db;
-        
         //Instancio el ViewHelper
         $viewHelper = new ViewHelper();
         $this->view = $viewHelper;
-        
     }
     
     public function acceso(){
@@ -41,13 +38,11 @@ class UsuarioController {
         $datos->mensaje = "Por favor, introduce usuario y clave";
         //Compruebo si ha rellenado el formulario
         if (isset($_POST['acceder'])){
-            
             $usuario = filter_input(INPUT_POST, 'usuario', FILTER_SANITIZE_STRING);
             $clave = filter_input(INPUT_POST, 'clave', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             if ($usuario AND $clave){
                 //Compruebo que existe el usuario
                 if ($this->comprueba_usuario($usuario,$clave)){
-                   
                     //Entro al panel
                     $datos->usuario = $_SESSION['usuario'];
                     $vista = "panel";
@@ -65,7 +60,6 @@ class UsuarioController {
     function comprueba_usuario($usuario,$clave){
         
         //Select con OBJ
-        
         $resultado = $this->db->query("SELECT * FROM usuario WHERE usuario='".$usuario."'");
         //Asigno la consulta a una variable
         $data = $resultado->fetch(\PDO::FETCH_OBJ);
@@ -103,24 +97,177 @@ class UsuarioController {
         header("Location: ".$_SESSION['home']."panel");
         
     }
+    
     public function crear(){
-        
-        
 
-        //Create
         //Insert
         $nombre = "usuario".rand(1000, 9999);
         $registros = $this->db->exec('INSERT INTO usuario (usuario) VALUES ("'.$nombre.'")');
+        //Mensaje
         if ($registros){
-            $mensaje[] = ['tipo' => 'succes',
-                        'texto' => "El usuario <strong>$nombre>/strong> se ha creado correctamente"];
-        }else{
-            $mensaje[] = ['tipo' => 'danger',
-                        'texto' => "Ha ocurrido un error al añadir el usuario"];
-            
+            $mensaje[] = [
+                        'tipo' => 'success',
+                        'texto' => "El usuario <strong>$nombre</strong> se ha añadico correctamente.",
+                        ];
         }
-        $_SESSION['mensaje'] = $mensaje;
+        else{
+            $mensaje[] = [
+                        'tipo' => 'danger',
+                        'texto' => "Ha ocurrido un error al añadir al usuario.",
+                        ]; 
+        }
+        $_SESSION['mensajes'] = $mensaje;
+
+        //Le redirijo al panel
         header("Location: ".$_SESSION['home']."panel/usuarios");
         
+    }
+    
+    function activar($id){
+        
+        if ($id){
+            $registros = $this->db->exec("UPDATE usuarios SET activo=1 WHERE id=".$id."");
+            //Mensaje
+            if ($registros){
+                $mensaje[] = [
+                            'tipo' => 'success',
+                            'texto' => "El usuario se ha activado correctamente.",
+                            ];
+            }
+            else{
+                $mensaje[] = [
+                            'tipo' => 'danger',
+                            'texto' => "Ha ocurrido un error al activar al usuario.",
+                            ]; 
+            }
+        }
+        else{
+            $mensaje[] = [
+                            'tipo' => 'danger',
+                            'texto' => "El usuario no existe.",
+                            ];
+        }
+        
+        $_SESSION['mensajes'] = $mensaje;
+        //Le redirijo al panel de usuarios
+        header("Location: ".$_SESSION['home']."panel/usuarios");
+        
+    }
+    
+    function desactivar($id){
+        
+        if ($id){
+            $registros = $this->db->exec("UPDATE usuarios SET activo=0 WHERE id=".$id."");
+            //Mensaje
+            if ($registros){
+                $mensaje[] = [
+                            'tipo' => 'success',
+                            'texto' => "El usuario se ha desactivado correctamente.",
+                            ];
+            }
+            else{
+                $mensaje[] = [
+                            'tipo' => 'danger',
+                            'texto' => "Ha ocurrido un error al desactivar al usuario.",
+                            ]; 
+            }
+        }
+        else{
+            $mensaje[] = [
+                            'tipo' => 'danger',
+                            'texto' => "El usuario no existe.",
+                            ];
+        }
+        
+        $_SESSION['mensajes'] = $mensaje;
+        //Le redirijo al panel de usuarios
+        header("Location: ".$_SESSION['home']."panel/usuarios");
+        
+    }
+    
+    function borrar($id){
+        
+        if ($id){
+            $registros = $this->db->exec("DELETE FROM usuario WHERE id=".$id."");
+            //Mensaje
+            if ($registros){
+                $mensaje[] = [
+                            'tipo' => 'success',
+                            'texto' => "El usuario se ha borrado correctamente.",
+                            ];
+            }
+            else{
+                $mensaje[] = [
+                            'tipo' => 'danger',
+                            'texto' => "Ha ocurrido un error al borrar al usuario.",
+                            ]; 
+            }
+        }
+        else{
+            $mensaje[] = [
+                            'tipo' => 'danger',
+                            'texto' => "El usuario no existe.",
+                            ];
+        }
+        
+        $_SESSION['mensajes'] = $mensaje;
+        //Le redirijo al panel de usuarios
+        header("Location: ".$_SESSION['home']."panel/usuarios");
+        
+    }
+    
+    function editar($id){
+        
+        if ($id){
+            if (isset($_POST["guardar"]) AND $_POST["guardar"] == "Guardar"){
+                //Recojo los valores de los inputs
+                $usuario = filter_input(INPUT_POST,'usuario',FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $usuarios = (filter_input(INPUT_POST, 'usuarios', FILTER_SANITIZE_STRING) == 'on') ? 1 : 0;
+                $noticias = (filter_input(INPUT_POST, 'noticias', FILTER_SANITIZE_STRING) == 'on') ? 1 : 0;
+                $clave = filter_input(INPUT_POST, 'clave', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                //TODO: GUARDAR LA CLAVE SI ESTÁ MARCADO EL CHECK
+                //Guardo en la base de datos
+                $this->db->beginTransaction();
+                $this->db->exec('UPDATE usuario SET usuario="'.$usuario.'" WHERE id='.$id.'');
+                $this->db->exec('UPDATE usuario SET usuarios="'.$usuarios.'" WHERE id='.$id.'');
+                $this->db->exec('UPDATE usuario SET noticias="'.$noticias.'" WHERE id='.$id.'');
+                $this->db->exec('UPDATE usuario SET clave="'.crypt('otaku',$clave).'" WHERE id='.$id.'');
+                $this->db->commit();
+                //Mensaje y redirección
+                $mensaje[] = [
+                            'tipo' => 'success',
+                            'texto' => "El usuario <strong>$usuario</strong> se ha guardado correctamente.",
+                            ];
+                $_SESSION['mensajes'] = $mensaje;
+                header("Location: ".$_SESSION['home']."panel/usuarios");
+            }
+            else{
+                $resultado = $this->db->query("SELECT * FROM usuario WHERE id=".$id." LIMIT 1");
+                if ($resultado){
+                    $usuario = $resultado->fetch(\PDO::FETCH_OBJ);
+                    //Le paso los datos a la vista
+                    $this->view->vista('usuario',$usuario);
+                }
+                else{
+                    $mensaje[] = [
+                                'tipo' => 'danger',
+                                'texto' => "Ha ocurrido un error al editar al usuario.",
+                                ]; 
+                    $_SESSION['mensajes'] = $mensaje;
+                    //Le redirijo al panel de usuarios
+                    header("Location: ".$_SESSION['home']."panel/usuarios");
+                }
+            }
+        }
+        else{
+            $mensaje[] = [
+                            'tipo' => 'danger',
+                            'texto' => "El usuario no existe.",
+                            ];
+            $_SESSION['mensajes'] = $mensaje;
+            //Le redirijo al panel de usuarios
+            header("Location: ".$_SESSION['home']."panel/usuarios");
+        }
+  
     }
 }

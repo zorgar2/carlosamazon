@@ -3,6 +3,7 @@ namespace App;
 session_start();
 
 use App\Controller\UsuarioController;
+use App\Controller\NoticiaController;
 
 //Ruta de la carpeta public
 $public = '/cms/public/';
@@ -44,36 +45,82 @@ function autoload($clase,$dir=null){
 //Compruebo qué ruta me están pidiendo
 $ruta = str_replace($home, '', $_SERVER['REQUEST_URI']);
 
-//Enrutamientos
-switch ($ruta){
-    
-    case 'panel': 
-        //Instancio el controlador
-        $controller = new UsuarioController;
-        
-        //Le mando al panel de acceso
-        $controller->acceso();
-        break;
-    case 'panel/salir':
-        //Instancio el controlador
-        $controller = new UsuarioController;
-        //Le mando al método salir
-        $controller->salir();
-        break;
-    case 'panel/usuarios':
-        //Instancio el controlador
-        $controller = new UsuarioController;
-        //Le mando al método salir
-        $controller->index();
-        break;
-    case 'panel/usuarios/crear':
-        //Instancio el controlador
-        $controller = new UsuarioController;
-        //Le mando al método salir
-        $controller->crear();
-        break;
-}
+$array_ruta = explode("/", $ruta);
 
+//Enrutamientos
+if (count($array_ruta) == 4){
+    
+    if ($array_ruta[0].$array_ruta[1] == "panelusuarios"){
+        if ($array_ruta[2] == "editar" OR 
+            $array_ruta[2] == "borrar" OR
+            $array_ruta[2] == "desactivar" OR
+            $array_ruta[2] == "activar"){
+            $controller = new UsuarioController;
+            $accion = $array_ruta[2];
+            $id = $array_ruta[3];
+            //LLamo a la acción
+            $controller->$accion($id);
+        }
+        else{
+            $controller = new AppController;
+            $controller->index();
+        }
+        
+    }
+    else if ($array_ruta[0].$array_ruta[1] == "panelnoticias"){
+        if ($array_ruta[2] == "editar" OR 
+            $array_ruta[2] == "borrar" OR
+            $array_ruta[2] == "desactivar" OR    
+            $array_ruta[2] == "activar"){
+            $controller = new NoticiaController;
+            $accion = $array_ruta[2];
+            $id = $array_ruta[3];
+            //LLamo a la acción
+            $controller->$accion($id);
+        }
+        else{
+            $controller = new AppController;
+            $controller->index();
+        }
+    }
+    else{
+        $controller = new AppController;
+        $controller->index();
+    }
+    
+}
+else{
+    switch ($ruta){
+
+        case 'panel':
+            $controller = new UsuarioController;
+            $controller->acceso();
+            break;
+        case 'panel/salir':
+            $controller = new UsuarioController;
+            $controller->salir();
+            break;
+        case 'panel/usuarios':
+            $controller = new UsuarioController;
+            $controller->index();
+            break;
+        case 'panel/usuarios/crear':
+            $controller = new UsuarioController;
+            $controller->crear();
+            break;
+        case 'panel/noticias':
+            $controller = new NoticiaController;
+            $controller->index();
+            break;
+        case 'panel/noticias/crear':
+            $controller = new NoticiaController;
+            $controller->crear();
+            break;
+        default: 
+            $controller = new AppController;
+            $controller->index();
+    }
+}
 
 //Llamo al pie
 require("../view/partials/footer.php");
