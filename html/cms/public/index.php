@@ -4,6 +4,7 @@ session_start();
 
 use App\Controller\UsuarioController;
 use App\Controller\NoticiaController;
+use App\Controller\AppController;
 
 //Ruta de la carpeta public
 $public = '/cms/public/';

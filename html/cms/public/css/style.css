@@ -1,7 +1,19 @@
 body{
     
 }
+.activo{
+    color:green;
+}
 
+.inactivo{
+    color:crimson;
+}
+
+.editar{text-align: center;
+  margin: auto;
+    
+    
+}
 .caja_acceso{
     border: 1px solid #777;
     padding: 1em;
@@ -121,9 +133,9 @@ a:hover{
 }
 
 .activo:hover{
-    color:green;
+    color:crimson;
 }
 
 .inactivo:hover{
-    color:crimson;
+    color:green;
 }

@@ -60,13 +60,14 @@ class UsuarioController {
     function comprueba_usuario($usuario,$clave){
         
         //Select con OBJ
-        $resultado = $this->db->query("SELECT * FROM usuario WHERE usuario='".$usuario."'");
+        $resultado = $this->db->query("SELECT * FROM usuario WHERE usuario='".$usuario."' AND activo=1");
         //Asigno la consulta a una variable
         $data = $resultado->fetch(\PDO::FETCH_OBJ);
         //Compruebo la contraseña
         if ($data AND hash_equals($data->clave, crypt($clave, $data->clave))){
-            //Añado el nombre de usuario a la sesión
+            //Añado el nombre de usuario y los permisos a la sesión
             $_SESSION['usuario'] = $data->usuario;
+            $_SESSION['usuarios'] = $data->usuarios;
             return 1;
         }
         else{
@@ -76,6 +77,8 @@ class UsuarioController {
     
     public function index(){
 
+        //Llamo a la funscion permisos
+        $this->permisos();
         //Select con OBJ
         $resultado = $this->db->query("SELECT * FROM usuario");
         //Asigno la consulta a una variable
@@ -90,7 +93,8 @@ class UsuarioController {
     
     public function salir(){
         
-        //Borro el nombre de usuario a la sesión
+        //Borro el nombre de usuario y los permisos a la sesion a la sesión
+        $_SESSION['usuario'] = "";
         $_SESSION['usuario'] = "";
         
         //Le redirijo al panel
@@ -126,7 +130,7 @@ class UsuarioController {
     function activar($id){
         
         if ($id){
-            $registros = $this->db->exec("UPDATE usuarios SET activo=1 WHERE id=".$id."");
+            $registros = $this->db->exec("UPDATE usuario SET activo=1 WHERE id=".$id."");
             //Mensaje
             if ($registros){
                 $mensaje[] = [
@@ -269,5 +273,18 @@ class UsuarioController {
             header("Location: ".$_SESSION['home']."panel/usuarios");
         }
   
+        
+        
+       function permisos(){
+           if (!isset($_SESSION['usuarios']) || $_SESSION['usuarios'] !=1){
+               $mensaje[] = [
+                   'tipo' => 'warning',
+                   'texto' => "Usuario no autorizado.",
+                   ];
+           $_SESSION['mensajes'] = $mensaje;
+            //Le redirijo al panel de usuarios
+            header("Location: ".$_SESSION['home']."panel");
+           }
+       }
     }
 }

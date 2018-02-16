@@ -2,7 +2,7 @@
     <?php require("partials/menu.php") ?>
     <?php require("partials/mensajes.php") ?>
     <div class="content_section listado">
-        <h2>usuarios</h2>
+        <h2>noticias</h2>
        
         <ul class="row titulo">
             <li class="col-9">NOTICIA</li>
@@ -17,14 +17,14 @@
                 </li>
                 <li class="col-3 derecha">
                     <?php $ruta = $_SESSION['home']."panel/noticias/editar/".$dato->id ?>
-                    <a href="<?php echo $ruta ?>">editar</a>
+                    <a href="<?php echo $ruta ?>"><i class="fas fa-edit"></i></a>
                     <?php $color = ($dato->activo==1) ? 'activo' : 'inactivo';?>
                     <?php $texto = ($dato->activo==1) ? 'desactivar' : 'activar';?>
                     <?php $ruta = $_SESSION['home']."panel/noticias/".$texto."/".$dato->id ?>
                     <a href="<?php echo $ruta ?>" class="<?php echo $color ?>"title="<?php echo $texto?>">
                         <span class="far fa-check-square"></span></a>
                     <?php $ruta = $_SESSION['home']."panel/noticias/borrar/".$dato->id ?>    
-                    <a href="<?php echo $ruta ?>">borrar</a>
+                    <a href="<?php echo $ruta ?>"><i class="fas fa-trash"></i></a>
                 </li>
             </ul>    
         <?php } ?>

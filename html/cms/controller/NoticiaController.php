@@ -153,7 +153,6 @@ class NoticiaController {
     }
     
     function editar($id){
-        
         if ($id){
             if (isset($_POST["guardar"]) AND $_POST["guardar"] == "Guardar"){
                 //Recojo los valores de los inputs
