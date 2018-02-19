@@ -19,6 +19,7 @@ body{
     padding: 1em;
     text-align: center;
     margin-top: 20%;
+    background-color: #FFF;
     
 }
 
@@ -66,9 +67,10 @@ footer{
 
 .menu{
     text-align: center;
-    margin-top: 4em;
+    margin-top: 1%;
     border-bottom: 1px solid #000;
     font-size: 2em;
+    
 }
 
 .menu ul{
@@ -138,4 +140,38 @@ a:hover{
 
 .inactivo:hover{
     color:green;
+}
+
+
+body {
+    color: #1c69db;
+}
+.infom {
+    color: #1c69db;
+}
+
+.infom h1 {
+    text-align: center;
+    margin: auto;
+}
+
+
+
+.editar {
+    border:2px solid #1c69db;
+    width: 20%;
+    height: 40%;
+    background-color: white;
+    margin-top: 20%;
+}
+
+.borde2 {
+    width: 20% ;
+    padding: 2%;
+    margin: 2%;
+    border:2px solid #1c69db;    
+    text-align: center;
+    display: inline-block;
+    height: 40%;
+    
 }

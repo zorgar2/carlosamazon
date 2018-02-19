@@ -77,7 +77,7 @@ class UsuarioController {
     
     public function index(){
 
-        //Llamo a la funscion permisos
+        //Llamo a la funcion permisos
         $this->permisos();
         //Select con OBJ
         $resultado = $this->db->query("SELECT * FROM usuario");
@@ -228,14 +228,12 @@ class UsuarioController {
                 $usuario = filter_input(INPUT_POST,'usuario',FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 $usuarios = (filter_input(INPUT_POST, 'usuarios', FILTER_SANITIZE_STRING) == 'on') ? 1 : 0;
                 $noticias = (filter_input(INPUT_POST, 'noticias', FILTER_SANITIZE_STRING) == 'on') ? 1 : 0;
-                $clave = filter_input(INPUT_POST, 'clave', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 //TODO: GUARDAR LA CLAVE SI ESTÁ MARCADO EL CHECK
                 //Guardo en la base de datos
                 $this->db->beginTransaction();
                 $this->db->exec('UPDATE usuario SET usuario="'.$usuario.'" WHERE id='.$id.'');
                 $this->db->exec('UPDATE usuario SET usuarios="'.$usuarios.'" WHERE id='.$id.'');
                 $this->db->exec('UPDATE usuario SET noticias="'.$noticias.'" WHERE id='.$id.'');
-                $this->db->exec('UPDATE usuario SET clave="'.crypt('otaku',$clave).'" WHERE id='.$id.'');
                 $this->db->commit();
                 //Mensaje y redirección
                 $mensaje[] = [
@@ -247,7 +245,7 @@ class UsuarioController {
             }
             else{
                 $resultado = $this->db->query("SELECT * FROM usuario WHERE id=".$id." LIMIT 1");
-                if ($resultado){
+                if($resultado){
                     $usuario = $resultado->fetch(\PDO::FETCH_OBJ);
                     //Le paso los datos a la vista
                     $this->view->vista('usuario',$usuario);
@@ -273,6 +271,7 @@ class UsuarioController {
             header("Location: ".$_SESSION['home']."panel/usuarios");
         }
   
+    }
         
         
        function permisos(){
@@ -286,5 +285,5 @@ class UsuarioController {
             header("Location: ".$_SESSION['home']."panel");
            }
        }
-    }
+   
 }

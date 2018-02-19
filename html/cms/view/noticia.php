@@ -13,7 +13,7 @@
             <?php $publicar = ($datos->activo == 1) ? 'checked' : '' ?>
             <input type="checkbox" name="publicar">Publicar<br>
             <a type="button" href="<?php echo $_SESSION['home'] ?>panel/noticias">Volver</a>
-            <input type="submit" name="Guardar">
+            <input type="submit" value="Guardar" name="guardar">
         </form>
     </div>
 </div>
