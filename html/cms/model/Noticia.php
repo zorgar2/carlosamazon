@@ -22,6 +22,8 @@ class Noticia {
         $this->id = $data->id;
         $this->titulo = $data->titulo;
         $this->entradilla = $data->entradilla;
+        $this->texto = $data->texto;
+        $this->autor = $data->autor;
         $this->fecha_alta = $data->fecha_alta;
         $this->fecha_mod = $data->fecha_mod;
         $this->fecha_pub = $data->fecha_pub;

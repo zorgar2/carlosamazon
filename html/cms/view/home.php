@@ -1,9 +1,9 @@
+<?php
+//Llamo al menu
+require("../view/partials/menu2.php");
+?>
 <div class="infom">
-<ul class="men">
-    <img class="gundam" src = "../public/img/icini.png"/>
-      <li class="letra"><a href="/cms/public/index.php">Home</a></li>
-      <li class="letra"><a href="">Sobre nosotros</a></li>
-</ul>
+
 <div class="borde">
     <?php foreach ($datos as $dato){?>
     <div class="borde2" style="background-image:url('/cms/public/img/<?php echo $dato->imagenes ?>')">

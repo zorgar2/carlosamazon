@@ -1,20 +1,16 @@
+<?php
+//Llamo al menu
+require("../view/partials/menu2.php");
+?>
 <div class=" ">
     <div class="editar">
-        <h2>Editar noticia</h2>
-        <form method="POST" enctype="multipart/form-data">
-            <span>Titulo</span><br>
-            <h2 <?php echo $datos->titulo;?>></h2><br><br>
-            <span>Entradilla</span><br>
-            <h4<?php echo $datos->entradilla;?>></h4><br>
-            <span>Texto</span><br>
-            <h4<?php echo $datos->texto;?>></h4><br>
-            <span>Autor</span><br>
-            <h4<?php echo $datos->autor;?>></h4><br>            
-            <?php $publicar = ($datos->activo == 1) ? 'checked' : '' ?>
-            <input type="checkbox" name="publicar">Publicar<br>
-            <input type="file" name="imagen"><br>
-            <a type="button" href="<?php echo $_SESSION['home'] ?>panel/noticias">Volver</a>
-            <input type="submit" value="Guardar" name="guardar">
-        </form>
+         <?php foreach ($datos as $dato){?>
+            <h2><?php echo $dato->titulo?></h2>
+            <img src="/cms/public/img/<?php echo $dato->imagenes ?>">
+            <h2><?php echo $dato->entradilla?></h2>
+            <h2><?php echo $dato->texto?></h2>
+            <h2><?php echo $dato->autor?></h2>
+            
+         <?php }?>
     </div>
 </div>
