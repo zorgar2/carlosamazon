@@ -15,6 +15,7 @@ class Noticia {
     var $autor;
     var $borrado;
     var $imagenes;
+    var $home;
 
     function __construct($data){
         
@@ -27,6 +28,7 @@ class Noticia {
         $this->activo = $data->activo;
         $this->borrado = $data->borrado;
         $this->imagenes = $data->imagenes;
+        $this->home = $data->home;
         
     }
 

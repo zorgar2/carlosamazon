@@ -21,7 +21,8 @@ class NoticiaController {
     }
     
     public function index(){
-
+           
+        $this->permisos();
         //Select con OBJ
         $resultado = $this->db->query("SELECT * FROM noticia");
         //Asigno la consulta a una variable
@@ -35,7 +36,8 @@ class NoticiaController {
     }
 
     public function crear(){
-
+           
+        $this->permisos();
         //Insert
         $nombre = "noticia".rand(1000, 9999);
         $registros = $this->db->exec('INSERT INTO noticia (titulo) VALUES ("'.$nombre.'")');
@@ -61,6 +63,7 @@ class NoticiaController {
     
     function activar($id){
         
+        $this->permisos();
         if ($id){
             $registros = $this->db->exec("UPDATE noticia SET activo=1 WHERE id=".$id."");
             //Mensaje
@@ -92,6 +95,7 @@ class NoticiaController {
     
     function desactivar($id){
         
+        $this->permisos();
         if ($id){
             $registros = $this->db->exec("UPDATE noticia SET activo=0 WHERE id=".$id."");
             //Mensaje
@@ -123,6 +127,7 @@ class NoticiaController {
     
     function borrar($id){
         
+        $this->permisos();
         if ($id){
             $registros = $this->db->exec("DELETE FROM noticia WHERE id=".$id."");
             //Mensaje
@@ -153,6 +158,8 @@ class NoticiaController {
     }
     
     function editar($id){
+        
+        $this->permisos();
         if ($id){
             if (isset($_POST["guardar"]) AND $_POST["guardar"] == "Guardar"){
                 //Recojo los valores de los inputs
@@ -161,23 +168,37 @@ class NoticiaController {
                 $autor = filter_input(INPUT_POST,'autor',FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 $texto = filter_input(INPUT_POST,'texto',FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 $activo = (filter_input(INPUT_POST, 'publicar', FILTER_SANITIZE_STRING) == 'on') ? 1 : 0;
-                //Guardo en la base de datos
-                $this->db->beginTransaction();
-                $this->db->exec('UPDATE noticia SET titulo="'.$titulo.'" WHERE id='.$id.'');
-                $this->db->exec('UPDATE noticia SET entradilla="'.$entradilla.'" WHERE id='.$id.'');
-                $this->db->exec('UPDATE noticia SET autor="'.$autor.'" WHERE id='.$id.'');
-                $this->db->exec('UPDATE noticia SET activo="'.$activo.'" WHERE id='.$id.'');
-                $this->db->exec('UPDATE noticia SET texto="'.$texto.'" WHERE id='.$id.'');
-                $this->db->commit();
-                //Mensaje y redirección
-                $mensaje[] = [
-                            'tipo' => 'success',
-                            'texto' => "La noticia <strong>$titulo</strong> se ha guardado correctamente.",
-                            ];
-                $_SESSION['mensajes'] = $mensaje;
-                header("Location: ".$_SESSION['home']."panel/noticias");
-            }
-            else{
+                
+                //Cojemos la ruta de la imagen
+                $imagen = $_FILES['imagen'];
+                $nombreimagen = basename($imagen["name"]);
+                $rutaImagen = '../public/img/' .$nombreimagen;
+                if (is_uploaded_file($_FILES["imagen"]["tmp_name"])AND move_uploaded_file($_FILES['imagen']["tmp_name"],$rutaImagen)){
+                    echo 'el fichero es valido';    
+                }else{
+                    echo "La imagen no ha podido subirse";
+                }
+                    //Guardo en la base de datos
+                    $this->db->beginTransaction();
+                    $this->db->exec('UPDATE noticia SET titulo="'.$titulo.'" WHERE id='.$id.'');
+                    $this->db->exec('UPDATE noticia SET entradilla="'.$entradilla.'" WHERE id='.$id.'');
+                    $this->db->exec('UPDATE noticia SET autor="'.$autor.'" WHERE id='.$id.'');
+                    $this->db->exec('UPDATE noticia SET activo="'.$activo.'" WHERE id='.$id.'');
+                    $this->db->exec('UPDATE noticia SET texto="'.$texto.'" WHERE id='.$id.'');
+                    if(basename($imagen["name"]) != ""){
+                    $this->db->exec('UPDATE noticia SET imagenes="'.$nombreimagen.'" WHERE id='.$id.'');
+                    }
+                    $this->db->commit();
+                    //Mensaje y redirección
+                    $mensaje[] = [
+                                'tipo' => 'success',
+                                'texto' => "La noticia <strong>$titulo</strong> se ha guardado correctamente.",
+                                ];
+                    $_SESSION['mensajes'] = $mensaje;
+                    header("Location: ".$_SESSION['home']."panel/noticias");
+                 
+                
+            }else{
                 $resultado = $this->db->query("SELECT * FROM noticia WHERE id=".$id." LIMIT 1");
                 $noticia = $resultado->fetch(\PDO::FETCH_OBJ);
                 if ($noticia){
@@ -205,4 +226,16 @@ class NoticiaController {
             header("Location: ".$_SESSION['home']."panel/noticias");
         }
     }
+       function permisos(){
+           
+           if (!isset($_SESSION['usuarios']) || $_SESSION['usuarios'] !=1){
+               $mensaje[] = [
+                   'tipo' => 'warning',
+                   'texto' => "Usuario no autorizado.",
+                   ];
+           $_SESSION['mensajes'] = $mensaje;
+            //Le redirijo al panel de usuarios
+            header("Location: ".$_SESSION['home']."panel");
+           }
+       }
 }

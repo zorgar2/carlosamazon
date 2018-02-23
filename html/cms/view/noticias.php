@@ -2,7 +2,7 @@
     <?php require("partials/menu.php") ?>
     <?php require("partials/mensajes.php") ?>
     <div class="content_section listado">
-        <h2>noticias</h2>
+        <h2>Noticias</h2>
        
         <ul class="row titulo">
             <li class="col-9">NOTICIA</li>

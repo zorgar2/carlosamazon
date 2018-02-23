@@ -49,7 +49,17 @@ $ruta = str_replace($home, '', $_SERVER['REQUEST_URI']);
 $array_ruta = explode("/", $ruta);
 
 //Enrutamientos
-if (count($array_ruta) == 4){
+if (count($array_ruta) == 2){
+    if (array_ruta [0] == "mostrar"){
+    $id = array_ruta[1];
+    //insertando el controlador
+    $controller = now AppController;
+    //Le mando el panel de acceso
+    $controller->mostrar($id);
+    
+    
+}
+else if (count($array_ruta) == 4){
     
     if ($array_ruta[0].$array_ruta[1] == "panelusuarios"){
         if ($array_ruta[2] == "editar" OR 
@@ -116,6 +126,10 @@ else{
         case 'panel/noticias/crear':
             $controller = new NoticiaController;
             $controller->crear();
+            break;
+        case 'mostrar':
+            $controller = new AppController;
+            $controller->mostrar();
             break;
         default: 
             $controller = new AppController;

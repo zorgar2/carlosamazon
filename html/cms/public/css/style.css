@@ -1,3 +1,7 @@
+@font-face {
+    font-family: "japan";
+    src: url(/cms/public/css/Japonesa.ttf) format("truetype");
+}
 body{
     
 }
@@ -166,12 +170,360 @@ body {
 }
 
 .borde2 {
+    border-radius: 15px;
     width: 20% ;
-    padding: 2%;
     margin: 2%;
     border:2px solid #1c69db;    
     text-align: center;
     display: inline-block;
-    height: 40%;
+    height: 420px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
     
+}
+.borde2:hover {
+    width: 20% ;
+    margin: 2%;
+    border:2px solid #1c69db;    
+    text-align: center;
+    display: inline-block;
+    height: 420px;
+    background-repeat: no-repeat;
+    background-size: 150% 150%;
+    transition-duration: 4s;
+    transition-delay: 0.5s;
+    
+    
+}
+
+
+.tit {
+    
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color:black;
+    margin-bottom: 10px;
+    width: 100%;
+    
+    
+}
+.tit2 {
+    width: 100%;
+    padding-bottom: 4px;
+    background-image: linear-gradient(to bottom, rgba(255,255,255,.3), rgba(0,0,0,.8));
+    border-radius: 13px 13px 0px 0px ;
+    
+}
+    .men {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        overflow: hidden;
+        background-color: #1c69db;
+        
+    }
+    .letra {
+        float: left;
+        font-family: "japan";
+        
+    }
+
+
+    .men li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        background-color: #1c69db;
+        height: 75px;
+    font-size:30px;
+    }
+
+    .men li a:hover {
+        background-color: #111;
+        text-decoration: none;
+        list-style-type: none;
+    }
+    
+    .borde {
+        
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 2%;
+        padding-left: 4%;
+        padding-right: 2%;
+        
+        
+    }
+    .gundam {
+            width: 5%;
+            float: left;
+        
+    }
+ 
+    
+    @media only screen and (max-width:768px){
+@font-face {
+    font-family: "japan";
+    src: url(/cms/public/css/Japonesa.ttf) format("truetype");
+}
+body{
+    
+}
+.activo{
+    color:green;
+}
+
+.inactivo{
+    color:crimson;
+}
+
+.editar{text-align: center;
+  margin: auto;
+    
+    
+}
+.caja_acceso{
+    border: 1px solid #777;
+    padding: 1em;
+    text-align: center;
+    margin-top: 20%;
+    background-color: #FFF;
+    
+}
+
+.caja_acceso input{
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    height: 2em;
+}
+
+.caja_acceso input[type="text"],
+.caja_acceso input[type="password"]{
+    width: 90%;
+    border: 1px solid #333;
+    margin: 0.5em 0;
+}
+
+.caja_acceso input[type="submit"]{
+    width: 90%;
+    border: 1px solid #17F;
+    margin: 0.5em 0;
+    background-color: #17F;
+    color: #FFF;
+    cursor: pointer;
+}
+
+.caja_acceso input[type="submit"]:hover{
+    background-color: #00F;
+    border: 1px solid #00F;
+}
+
+footer{
+    margin: 1em 1% 0 1%;
+    padding: 0.5em;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    border-top: 1px solid #ccc;
+    width: 98%;
+}
+
+.rojo{
+    color: #F00;
+}
+
+.menu{
+    text-align: center;
+    margin-top: 1%;
+    border-bottom: 1px solid #000;
+    font-size: 2em;
+    
+}
+
+.menu ul{
+    list-style: none;
+}
+
+.menu li{
+    display: inline;
+    padding: 0 0.5em;
+}
+
+a:hover{
+    text-decoration: none;
+}
+
+.menu li:hover{
+    background-color: rgba(0,123,255,0.1);
+}
+
+.content_section{
+    margin-top: 3em;
+}
+
+.listado h2{
+    margin: 1em 0;
+    font-size: 3em;
+}
+
+.listado ul{
+    list-style: none;
+    border-bottom: 1px solid #eee;
+    padding: 0.5em;
+    margin: 0;
+}
+
+
+
+.listado .titulo{
+    font-weight: bold;
+    border-bottom: 1px solid #000;
+    padding: 0 0.5em;
+}
+
+.listado .item:hover{
+    background-color: rgba(0,123,255,0.1);
+}
+
+
+.listado li{
+    display: inline-block;
+    padding: 0;
+    
+}
+
+.derecha{
+    text-align: right;
+}
+
+.alert{
+    position:absolute;
+    width: 80%;
+}
+
+.activo:hover{
+    color:crimson;
+}
+
+.inactivo:hover{
+    color:green;
+}
+
+
+body {
+    color: #1c69db;
+}
+.infom {
+    color: #1c69db;
+}
+
+.infom h1 {
+    text-align: center;
+    margin: auto;
+}
+
+
+
+.editar {
+    border:2px solid #1c69db;
+    width: 20%;
+    height: 40%;
+    background-color: white;
+    margin-top: 20%;
+}
+
+.borde2 {
+    border-radius: 15px;
+    width: 20% ;
+    margin: 2%;
+    border:2px solid #1c69db;    
+    text-align: center;
+    display: inline-block;
+    height: 420px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    
+}
+.borde2:hover {
+    width: 20% ;
+    margin: 2%;
+    border:2px solid #1c69db;    
+    text-align: center;
+    display: inline-block;
+    height: 420px;
+    background-repeat: no-repeat;
+    background-size: 150% 150%;
+    transition-duration: 4s;
+    transition-delay: 0.5s;
+    
+    
+}
+
+
+.tit {
+    
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color:black;
+    margin-bottom: 10px;
+    width: 100%;
+    
+    
+}
+.tit2 {
+    width: 100%;
+    padding-bottom: 4px;
+    background-image: linear-gradient(to bottom, rgba(255,255,255,.3), rgba(0,0,0,.8));
+    border-radius: 13px 13px 0px 0px ;
+    
+}
+.men {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow: hidden;
+    background-color: #1c69db;
+        
+    }
+.letra {
+    float: left;
+    font-family: "japan";
+        
+    }
+
+
+.men li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    background-color: #1c69db;
+    height: 75px;
+    font-size:30px;
+}
+
+.men li a:hover {
+    background-color: #111;
+    text-decoration: none;
+    list-style-type: none;
+}
+    
+.borde {
+
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 2%;
+    padding-left: 4%;
+    padding-right: 2%;
+
+
+}
+.gundam {
+        width: 7%;
+        float: left;
+
+}        
+
+
+
 }

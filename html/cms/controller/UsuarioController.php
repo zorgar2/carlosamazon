@@ -95,7 +95,7 @@ class UsuarioController {
         
         //Borro el nombre de usuario y los permisos a la sesion a la sesión
         $_SESSION['usuario'] = "";
-        $_SESSION['usuario'] = "";
+        $_SESSION['usuarios'] = "";
         
         //Le redirijo al panel
         header("Location: ".$_SESSION['home']."panel");
@@ -103,7 +103,8 @@ class UsuarioController {
     }
     
     public function crear(){
-
+        
+        $this->permisos();
         //Insert
         $nombre = "usuario".rand(1000, 9999);
         $registros = $this->db->exec('INSERT INTO usuario (usuario) VALUES ("'.$nombre.'")');
@@ -129,6 +130,7 @@ class UsuarioController {
     
     function activar($id){
         
+        $this->permisos();
         if ($id){
             $registros = $this->db->exec("UPDATE usuario SET activo=1 WHERE id=".$id."");
             //Mensaje
@@ -160,6 +162,7 @@ class UsuarioController {
     
     function desactivar($id){
         
+        $this->permisos();
         if ($id){
             $registros = $this->db->exec("UPDATE usuarios SET activo=0 WHERE id=".$id."");
             //Mensaje
@@ -191,6 +194,7 @@ class UsuarioController {
     
     function borrar($id){
         
+        $this->permisos();
         if ($id){
             $registros = $this->db->exec("DELETE FROM usuario WHERE id=".$id."");
             //Mensaje
@@ -222,6 +226,7 @@ class UsuarioController {
     
     function editar($id){
         
+        $this->permisos();
         if ($id){
             if (isset($_POST["guardar"]) AND $_POST["guardar"] == "Guardar"){
                 //Recojo los valores de los inputs
@@ -275,6 +280,7 @@ class UsuarioController {
         
         
        function permisos(){
+           
            if (!isset($_SESSION['usuarios']) || $_SESSION['usuarios'] !=1){
                $mensaje[] = [
                    'tipo' => 'warning',
