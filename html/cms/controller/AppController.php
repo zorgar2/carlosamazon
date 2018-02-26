@@ -34,6 +34,20 @@ class AppController {
         $this->view->vista("home",$noticias);
         
     }
+    public function todas(){
+
+        //Select con OBJ
+        $resultado = $this->db->query("SELECT * FROM noticia");
+        //Asigno la consulta a una variable
+        $noticias = [];
+        while ($data = $resultado->fetch(\PDO::FETCH_OBJ)){ //Recorro el resultado
+            $noticias[] = new Noticia($data);
+        }
+        
+        //Le paso los datos
+        $this->view->vista("todo",$noticias);
+        
+    }
     public function mostrar($id) {
         //selecciona con obj
         $resultado = $this->db->query("SELECT * FROM  noticia WHERE id='" . $id . "'");

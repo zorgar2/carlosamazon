@@ -7,7 +7,7 @@
             <span>Entradilla</span><br>
             <input type="text" name="entradilla" value="<?php echo $datos->entradilla;?>"><br><br>
             <span>Texto</span><br>
-            <input type="text" name="texto" value="<?php echo $datos->texto;?>"><br><br>
+            <input class="tam" type="textarea" name="texto" value="<?php echo $datos->texto;?>"><br><br>
             <span>Autor</span><br>
             <input type="text" name="autor" value="<?php echo $datos->autor;?>"><br><br>            
             <?php $publicar = ($datos->activo == 1) ? 'checked' : '' ?>

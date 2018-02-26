@@ -130,6 +130,10 @@ else{
             $controller = new AppController;
             $controller->sobre();
             break;
+        case 'todo':
+            $controller = new AppController;
+            $controller->todas();
+            break;
         default: 
             $controller = new AppController;
             $controller->index();
