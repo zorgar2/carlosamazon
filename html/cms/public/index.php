@@ -81,7 +81,9 @@ if (count($array_ruta) == 2 && $array_ruta[0] == "mostrar"){
         if ($array_ruta[2] == "editar" OR 
             $array_ruta[2] == "borrar" OR
             $array_ruta[2] == "desactivar" OR    
-            $array_ruta[2] == "activar"){
+            $array_ruta[2] == "activar" OR
+            $array_ruta[2] == "desactivar1" OR
+            $array_ruta[2] == "activar1"){
             $controller = new NoticiaController;
             $accion = $array_ruta[2];
             $id = $array_ruta[3];

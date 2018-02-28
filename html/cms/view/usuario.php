@@ -13,8 +13,8 @@
             <?php $noticias = ($datos->noticias == 1) ? 'checked' : '' ?>
             <input type="checkbox" name="noticias">Noticias<br>
             <input type="checkbox" name="usuarios">Usuarios<br>
-            <a type="button" href="<?php echo $_SESSION['home'] ?>panel/usuarios">Volver</a>
-            <input type="submit" value="Guardar" name="guardar">
+            <a class="btn" type="button" href="<?php echo $_SESSION['home'] ?>panel/usuarios">Volver</a>
+            <input class="btn" type="submit" value="Guardar" name="guardar">
         </form>
     </div>
 </div>

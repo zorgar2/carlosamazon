@@ -124,6 +124,69 @@ class NoticiaController {
         header("Location: ".$_SESSION['home']."panel/noticias");
         
     }
+        function activar1($id){
+        
+        $this->permisos();
+        if ($id){
+            $registros = $this->db->exec("UPDATE noticia SET home=1 WHERE id=".$id."");
+            //Mensaje
+            if ($registros){
+                $mensaje[] = [
+                            'tipo' => 'success',
+                            'texto' => "La noticia se ha activado correctamente.",
+                            ];
+            }
+            else{
+                $mensaje[] = [
+                            'tipo' => 'danger',
+                            'texto' => "Ha ocurrido un error al activar la noticia.",
+                            ]; 
+            }
+        }
+        else{
+            $mensaje[] = [
+                            'tipo' => 'danger',
+                            'texto' => "La noticia no existe.",
+                            ];
+        }
+        
+        $_SESSION['mensajes'] = $mensaje;
+        //Le redirijo al panel de noticias
+        header("Location: ".$_SESSION['home']."panel/noticias");
+        
+    }
+    
+    function desactivar1($id){
+        
+        $this->permisos();
+        if ($id){
+            $registros = $this->db->exec("UPDATE noticia SET home=0 WHERE id=".$id."");
+            //Mensaje
+            if ($registros){
+                $mensaje[] = [
+                            'tipo' => 'success',
+                            'texto' => "La noticia se ha desactivado correctamente.",
+                            ];
+            }
+            else{
+                $mensaje[] = [
+                            'tipo' => 'danger',
+                            'texto' => "Ha ocurrido un error al desactivar la noticia.",
+                            ]; 
+            }
+        }
+        else{
+            $mensaje[] = [
+                            'tipo' => 'danger',
+                            'texto' => "La noticia no existe.",
+                            ];
+        }
+        
+        $_SESSION['mensajes'] = $mensaje;
+        //Le redirijo al panel de noticias
+        header("Location: ".$_SESSION['home']."panel/noticias");
+        
+    }
     
     function borrar($id){
         

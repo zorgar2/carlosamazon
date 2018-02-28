@@ -23,6 +23,11 @@
                     <?php $ruta = $_SESSION['home']."panel/noticias/".$texto."/".$dato->id ?>
                     <a href="<?php echo $ruta ?>" class="<?php echo $color ?>"title="<?php echo $texto?>">
                         <span class="far fa-check-square"></span></a>
+                    <?php $color1 = ($dato->home==1) ? 'activo' : 'inactivo';?>
+                    <?php $texto1 = ($dato->home==1) ? 'desactivar1' : 'activar1';?>
+                    <?php $ruta = $_SESSION['home']."panel/noticias/".$texto1."/".$dato->id ?>
+                    <a href="<?php echo $ruta ?>" class="<?php echo $color1 ?>"title="<?php echo $texto1?>">
+                        <span class="fas fa-calendar-minus"></span></a>
                     <?php $ruta = $_SESSION['home']."panel/noticias/borrar/".$dato->id ?>    
                     <a href="<?php echo $ruta ?>"><i class="fas fa-trash"></i></a>
                 </li>

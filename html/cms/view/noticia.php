@@ -12,9 +12,9 @@
             <input type="text" name="autor" value="<?php echo $datos->autor;?>"><br><br>            
             <?php $publicar = ($datos->activo == 1) ? 'checked' : '' ?>
             <input type="checkbox" name="publicar">Publicar<br>
-            <input type="file" name="imagen"><br>
-            <a type="button" href="<?php echo $_SESSION['home'] ?>panel/noticias">Volver</a>
-            <input type="submit" value="Guardar" name="guardar">
+            <input class="btn" type="file" name="imagen"><br>
+            <a class="btn" type="button" href="<?php echo $_SESSION['home'] ?>panel/noticias">Volver</a>
+            <input class="btn" type="submit" value="Guardar" name="guardar">
         </form>
     </div>
 </div>
