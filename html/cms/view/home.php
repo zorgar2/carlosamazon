@@ -2,18 +2,21 @@
 //Llamo al menu
 require("../view/partials/menu2.php");
 ?>
-<div class="infom">
-
-<div class="borde">
-    <?php foreach ($datos as $dato){?>
-    <div class="borde2" style="background-image:url('/cms/public/img/<?php echo $dato->imagenes ?>')">
-         <a href="../public/index.php/mostrar/<?php echo $dato->id?> ">
-             <div class="tit2">   
-                <h2 class="tit"  ><?php echo $dato->titulo ?></h2>
-             </div>
-    </a>
+<div id="wrapper-container">
+    <div class="container object">
+	<div id="main-container-image">
+            <section class="work">
+            	<?php foreach ($datos as $dato){?>
+	            	<div class="white">
+                            <a href="../public/index.php/mostrar/<?php echo $dato->id?> ">
+				<img src="/cms/public/img/<?php echo $dato->imagenes ?>" alt="" />
+                            </a>
+	                    <div id="wrapper-part-info">
+	                    	<div id="part-info"><?php echo $dato->titulo ?></div>
+                            </div>
+	                </div>
+	            <?php }?>
+            </section>
+        </div>
     </div>
-   
-    <?php }?>
-</div>
 </div>

@@ -3,10 +3,6 @@
     src: url(/cms/public/css/Japonesa.ttf) format("truetype");
 }
 body{
-    background-image: url(/cms/public/img/fairy.jpg);
-    background-repeat: no-repeat;
-    background-color: black;
-    font-family: "japan";
     
 }
 .activo{
@@ -280,32 +276,6 @@ body {
             height: 150px;
             columns: 7;
     }
-.btn {
-  background: #1c69db;
-  background-image: -webkit-linear-gradient(top, #1c69db, #2980b9);
-  background-image: -moz-linear-gradient(top, #1c69db, #2980b9);
-  background-image: -ms-linear-gradient(top, #1c69db, #2980b9);
-  background-image: -o-linear-gradient(top, #1c69db, #2980b9);
-  background-image: linear-gradient(to bottom, #1c69db, #2980b9);
-  -webkit-border-radius: 4;
-  -moz-border-radius: 4;
-  border-radius: 4px;
-  font-family: Arial;
-  color: #ffffff;
-  font-size: 20px;
-  padding: 4px 8px 3px 7px;
-  text-decoration: none;
-}
-
-.btn:hover {
-  background: #3cb0fd;
-  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
-  text-decoration: none;
-}
     
     @media only screen and (max-width:768px){
 
@@ -316,3 +286,239 @@ body {
 }        
 
   }
+
+/*----------------------------*/
+/* MAIN DIV */
+/*----------------------------*/
+
+#wrapper-container{
+    float:left;
+    width:100%;
+    height:auto;
+}
+
+.container,.container-footer {
+    position:relative;
+    width: 1200px;
+    margin-left:-600px;
+    left:50%;
+}
+
+/*----------------------------*/
+/* MAIN DIV WITH IMAGE */
+/*----------------------------*/
+
+#main-container-image {
+    float:left;
+    width:100%;
+    height:auto;
+    background-color:#F4F4F4;
+    margin-top:25px;
+}
+
+.work div {
+    float:left;
+    width:calc(100% / 4 - 30px);
+    height:auto;
+    line-height:auto;
+    position: relative;
+    padding: 0 !important;
+    margin: 15px;
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -webkit-box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.2);
+    -moz-box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.2);
+    box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.2);
+    background-color:#FFF;
+}
+
+.work div.white dl{
+    background: #FFF;
+}
+
+
+.work div a img {
+    height: 90%;
+    width: 90%;
+    margin-left:5%;
+    margin-top:5%;
+}
+
+
+
+
+#wrapper-part-info{
+    position:relative;
+    width:100%;
+    height:44px;
+    background-color:#FFFFFF;
+}
+
+#part-info{
+    float:left;
+    width:calc(100% - 53px);
+    text-align:left;
+    line-height:44px;
+    font-family: Helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 15px;
+    font-weight:400;
+    color:#666;
+    margin-left:10px;
+    height:44px;
+}
+
+.part-info-image{
+    float:left;
+    margin-left:15px;
+    margin-top:8px;
+}
+
+.part-info-image img{width:100%;height:100%;}
+
+@media only screen and (max-width: 2000px) {
+#main-container-menu {
+    display:none;
+}
+}
+
+/* Others wide screen */
+ 
+@media only screen and (max-width: 1200px) {
+#main-header,.navbar,.container,.container-footer,.thank,.oldnew,.copyright {
+    width:940px;
+    margin-left:-465px;
+}
+#main-container-menu {
+    display:none;
+}
+
+.work div {
+    width:calc(100% / 3 - 30px);
+}
+}
+
+/* Small viewports — Old monitors, netbooks, tablets (landscape), etc. */
+ 
+@media only screen and (max-width: 965px) {
+#main-header,.navbar,.container,.container-footer,.thank,.oldnew,.copyright {
+    width:835px;
+    margin-left:-417.5px;
+}
+#main-container-menu {
+    display:none;
+}
+#row-1f,#row-2f,#row-3f,#row-4f{
+    width:100%;
+}
+.text-row-1f,.text-row-2f,.text-row-3f,.text-row-4f{
+    text-align:center;
+    width:70%;
+    margin-left:15%;
+}
+.text-row-1f{
+    margin-top:75px;
+    margin-bottom:35px;
+}
+.text-row-4f{
+    margin-top:0;
+    margin-bottom:0;
+}
+.text-row-2f,.text-row-3f{
+    margin-bottom:35px;
+    margin-top:0;
+}
+#tip_newsletter_input{
+    position:relative;
+    left:50%;
+    margin-left:-112.5px;
+    margin-bottom:75px;
+}
+}
+
+/* Smaller viewports — more tablets, old monitors */
+ 
+@media only screen and (max-width: 860px) {
+#main-header,.navbar,.container,.container-footer,.thank,.oldnew,.copyright {
+    width:715px;
+    margin-left:-357.5px;
+}
+#main-container-menu {
+    display:none;
+}
+}
+
+/* Even smaller viewports — more tablets, etc. */
+ 
+@media only screen and (max-width: 740px) {
+#main-header,.navbar,.container,.container-footer,.thank,.oldnew,.copyright {
+    width:585px;
+    margin-left:-292.5px;
+}   
+#wrapper-bouton-icon,#main_tip_search{
+    display:none;
+}
+#stripes {
+    display:block;
+}
+#main-container-menu {
+    display:block;
+}
+.work div {
+    width:calc(100% / 2 - 30px);
+}
+}
+
+/* Mobile phones (Landscape) and Tablets (Portrait) */
+ 
+@media only screen and (max-width: 610px) {
+#main-header,.navbar,.container,.container-footer,.thank,.oldnew,.copyright {
+    width:455px;
+    margin-left:-227.5px;
+} 
+#wrapper-sorting{
+    position:relative;
+    width:300px;
+    left:50%;
+    margin-left:-165px;
+}
+.top-rated,.recent,.oldies{
+    text-align:center;
+    font-family: 'Roboto',sans-serif;
+    font-size: 13px;
+    height:40px;
+    line-height:40px;
+    margin-left:25px;
+}
+}
+
+/* Mobile phones (Landscape) and Tablets (Portrait) */
+ 
+@media only screen and (max-width: 480px) {
+#main-header,.navbar,.container,.container-footer,.thank,.oldnew,.copyright {
+    width:295px;
+    margin-left:-147.5px;
+}
+.work div {
+    width:calc(100% - 30px);
+}
+.wrapper-navbouton{
+    display:none;
+}
+.copy-text{
+    text-align:center;
+    width:100%;
+}
+.thank-text{
+    font-size: 50px;
+}
+}
+/* Mobile phones (iphone4/5)*/
+ 
+@media only screen and (max-width: 320px) {
+
+}
